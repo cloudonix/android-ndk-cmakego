@@ -1,3 +1,3 @@
 FROM bitriseio/android-ndk
-
-RUN apt-get update && apt-get install -qy cmake golang && rm -rf /var/lib/apt/lists/*
+RUN echo "deb http://archive.ubuntu.com/ubuntu/ bionic main restricted" > /etc/apt/sources.list.d/bionic.list
+RUN apt-get update && apt-get install -qy cmake golang ninja-build && rm -rf /var/lib/apt/lists/*
