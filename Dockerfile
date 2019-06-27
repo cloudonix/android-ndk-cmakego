@@ -40,4 +40,4 @@ RUN chown -R 3000:3000 /opt/android-sdk-linux
 RUN touch /root/.android/repositories.cfg
 RUN CMAKE_AND_VER=$(/opt/android-sdk-linux/tools/bin/sdkmanager --list  | grep cmake | tail -1 | awk '{print $1; exit}') ;  (echo y | /opt/android-sdk-linux/tools/bin/sdkmanager $CMAKE_AND_VER)
 RUN echo y | /opt/android-sdk-linux/tools/bin/sdkmanager --licenses
-~                                                                    
+                                                                 
