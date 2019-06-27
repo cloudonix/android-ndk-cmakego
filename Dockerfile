@@ -30,5 +30,6 @@ RUN (${ANDROID_HOME}/tools/bin/sdkmanager --list | awk '$1~/cmake/{print$1}'; \
 		"build-tools;28.0.3" \
 		"build-tools;29.0.0" \
 	) | xargs ${ANDROID_HOME}/tools/bin/sdkmanager
-ENV GRADLE_USER_HOME=/root/.cache/gradle GRADLE_OPTS=-Dorg.gradle.daemon=false
+ENV GRADLE_USER_HOME=/tmp/gradle-cache GRADLE_OPTS=-Dorg.gradle.daemon=false
+RUN mkdir -p $GRADLE_USER_HOME && chmod 777 $GRADLE_USER_HOME
 VOLUME $GRADLE_USER_HOME
