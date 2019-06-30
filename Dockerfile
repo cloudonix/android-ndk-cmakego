@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
 	apt-get install -qy \
-		curl unzip \
+		curl unzip rsync \
 		cmake golang ninja-build swig \
 		openjdk-8-jdk-headless \
 		&& \
@@ -11,7 +11,7 @@ RUN apt-get update && \
 ENV ANDROID_HOME=/opt/android/sdk \
 	ANDROID_SDK_VERSION=4333796 \
 	ANDROID_NDK_HOME=/opt/android/ndk \
-	ANDROID_NDK_VERSION=r18
+	ANDROID_NDK_VERSION=r18 \
 	ANDROID_NDK_ROOT=/opt/android/ndk
 
 RUN curl -s https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip -o /tmp/android_tools.zip && \
