@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
 	apt-get install -qy \
-		curl unzip rsync \
+		curl unzip rsync file uuid-dev \
 		cmake golang ninja-build swig \
 		openjdk-8-jdk-headless \
 		&& \
