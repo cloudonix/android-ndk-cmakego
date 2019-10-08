@@ -3,7 +3,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
 	apt-get install -qy \
 		curl unzip rsync file uuid-dev \
-		cmake golang ninja-build swig \
+		cmake golang ninja-build swig autoconf \
 		openjdk-8-jdk-headless \
 		&& \
 	rm -rf /var/lib/apt/lists/*
