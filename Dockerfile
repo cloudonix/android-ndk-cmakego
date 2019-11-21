@@ -19,7 +19,7 @@ RUN curl -s https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_S
 	cd ${ANDROID_HOME} && unzip -q /tmp/android_tools.zip && rm -f /tmp/android_tools.zip
 RUN curl -s https://dl.google.com/android/repository/android-ndk-${ANDROID_NDK_VERSION}-linux-x86_64.zip -o /tmp/android_ndk.zip && \
 	(mkdir -p /tmp/ndk-base && cd /tmp/ndk-base && unzip -q /tmp/android_ndk.zip && mv * ${ANDROID_NDK_HOME}) && \
-	rm -rf /tmp/ndk-base /tmp/android_ndk.zip
+	rm -rf /tmp/ndk-base /tmp/android_ndk.zip && echo "Installed Android NDK $(grep Revision ${ANDROID_NDK_HOME}/source.properties)"
     
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_NDK_HOME}
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
