@@ -11,7 +11,7 @@ RUN apt-get update && \
 ENV ANDROID_HOME=/opt/android/sdk \
 	ANDROID_SDK_VERSION=4333796 \
 	ANDROID_NDK_HOME=/opt/android/ndk \
-	ANDROID_NDK_VERSION=r18 \
+	ANDROID_NDK_VERSION=r18b \
 	ANDROID_NDK_ROOT=/opt/android/ndk
 
 RUN curl -s https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip -o /tmp/android_tools.zip && \
