@@ -4,7 +4,7 @@ RUN apt-get update && \
 	apt-get install -qy \
 		curl unzip rsync file uuid-dev \
 		cmake golang ninja-build swig autoconf \
-		openjdk-8-jdk-headless \
+		openjdk-8-jdk-headless openjdk-11-jdk-headless \
 		&& \
 	rm -rf /var/lib/apt/lists/*
 	
