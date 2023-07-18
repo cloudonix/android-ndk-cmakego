@@ -7,7 +7,7 @@ RUN apt-get update && \
 		cmake golang ninja-build swig autoconf \
 		openjdk-8-jdk-headless openjdk-11-jdk-headless \
 		&& \
-	add-apt-repository -y universe && apt-get install -qy libncurses5
+	add-apt-repository -y universe && apt-get install -qy libncurses5 && \
 	rm -rf /var/lib/apt/lists/*
 
 ENV ANDROID_HOME=/opt/android/sdk \
