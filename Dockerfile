@@ -1,12 +1,11 @@
 FROM ubuntu:latest
 ENV DEBIAN_FRONTEND noninteractive
-# Java 11 is needed for the new Android command-line tools
-ENV JAVA_VERSION 11
+# JDK 8 is used to build while we need JDK 11 for the new Android command-line tools
 RUN apt-get update && \
 	apt-get install -qy \
 		curl unzip rsync file uuid-dev \
 		cmake golang ninja-build swig autoconf \
-		openjdk-$JAVA_VERSION-jdk-headless \
+		openjdk-8-jdk-headless openjdk-11-jdk-headless \
 		&& \
 	rm -rf /var/lib/apt/lists/*
 
