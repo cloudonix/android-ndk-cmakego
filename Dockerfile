@@ -2,11 +2,12 @@ FROM ubuntu:latest
 ENV DEBIAN_FRONTEND noninteractive
 # JDK 8 is used to build while we need JDK 11 for the new Android command-line tools
 RUN apt-get update && \
-	apt-get install -qy \
+	apt-get install -qy software-properties-common \
 		curl unzip rsync file uuid-dev \
 		cmake golang ninja-build swig autoconf \
 		openjdk-8-jdk-headless openjdk-11-jdk-headless \
 		&& \
+	add-apt-repository -y universe && apt-get install -qy libncurses5
 	rm -rf /var/lib/apt/lists/*
 
 ENV ANDROID_HOME=/opt/android/sdk \
