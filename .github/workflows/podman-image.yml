@@ -1,0 +1,41 @@
+name: Container Image CI
+
+on:
+  push:
+    branches: [ "ndk16", "master" ]
+    tags:
+    - ndk*
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: quay
+    steps:
+    - name: Setup env
+      shell: bash
+      run: |
+        set -x
+        ref="${{ github.ref }}"
+        (
+          if [ "$(basename $(dirname $ref))" == "tags" ]; then
+            name="$(basename $ref)"
+            echo IMGTAG=${name%%-*} >> $GITHUB_ENV
+            exit 0
+          fi
+          # its a branch, I hope
+          if grep -q ndk <<<$ref; then
+            echo IMGTAG=$(basename $ref) >> $GITHUB_ENV
+            exit 0
+          fi
+          echo IMGTAG=latest >> $GITHUB_ENV
+        )
+    - uses: actions/checkout@v3
+    - name: Build Container
+      shell: bash
+      run: docker build -t quay.io/cloudonix/android-ndk-cmakego:$IMGTAG -f Dockerfile .
+    - name: Log in to Quay
+      shell: bash
+      run: |
+        docker login -u "${{ secrets.REGISTRY_QUAY_USER }}" -p "${{ secrets.REGISTRY_QUAY_PASSWORD }}" quay.io/cloudonix/android-ndk-cmakego
+    - name: Deploy to Quay
+      shell: bash
+      run: docker push quay.io/cloudonix/android-ndk-cmakego:$IMGTAG
