@@ -1,3 +1,4 @@
+---
 name: Scheduled NDK 16 CI build
 
 on:
@@ -7,6 +8,6 @@ on:
 
 jobs:
   trigger-main-workflow:
-    uses: cloudonix/android-ndk-cmakego/.github/workflows/podman-image.yml
+    uses: cloudonix/android-ndk-cmakego/.github/workflows/podman-image.yml@master
     with:
       override_ref: ndk16
