@@ -14,15 +14,16 @@ ENV ANDROID_HOME=/opt/android/sdk \
 	ANDROID_NDK_VERSION=r14b \
 	ANDROID_NDK_ROOT=/opt/android/ndk
 
-RUN curl -s https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip -o /tmp/android_tools.zip && \
+RUN curl -# https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip -o /tmp/android_tools.zip && \
 	mkdir -p ${ANDROID_HOME} && \
 	cd ${ANDROID_HOME} && unzip -q /tmp/android_tools.zip && rm -f /tmp/android_tools.zip
-RUN curl -s https://dl.google.com/android/repository/android-ndk-${ANDROID_NDK_VERSION}-linux-x86_64.zip -o /tmp/android_ndk.zip && \
+RUN curl -# https://dl.google.com/android/repository/android-ndk-${ANDROID_NDK_VERSION}-linux-x86_64.zip -o /tmp/android_ndk.zip && \
 	(mkdir -p /tmp/ndk-base && cd /tmp/ndk-base && unzip -q /tmp/android_ndk.zip && mv * ${ANDROID_NDK_HOME}) && \
 	rm -rf /tmp/ndk-base /tmp/android_ndk.zip && echo "Installed Android NDK $(grep Revision ${ANDROID_NDK_HOME}/source.properties)"
-    
+
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_NDK_HOME}
-RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses > /dev/null
 RUN (${ANDROID_HOME}/tools/bin/sdkmanager --list | awk '$1~/cmake/{print$1}'; \
 	echo \
 		"platform-tools" \
