@@ -8,3 +8,4 @@ the NDK version you require.
 
 Currently supported tags:
 - `ndk16` for Android NDK r16b
+- `ndk14` for Android NDK r14b
