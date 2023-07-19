@@ -22,7 +22,7 @@ jobs:
     - name: Check build ref
       shell: bash
       run: |
-        if [ -n "${{ inputs.override_ref }}" ]; then echo current_ref=${{ inputs.override_ref }} >> $GITHUB_ENV
+        if [ -n "${{ inputs.override_ref }}" ]; then echo current_ref=${{ inputs.override_ref }} >> $GITHUB_ENV; fi
     - name: Setup env
       shell: bash
       run: |
