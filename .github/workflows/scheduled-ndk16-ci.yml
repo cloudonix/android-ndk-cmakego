@@ -1,7 +1,8 @@
 name: Scheduled NDK 16 CI build
 
 on:
-  schedule: 
+  workflow_dispatch:
+  schedule:
   - cron: '31 9 2 * *'
 
 jobs:
