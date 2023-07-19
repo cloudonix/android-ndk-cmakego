@@ -2,7 +2,9 @@ name: Container Image CI
 
 on:
   push:
-    branches: [ "master", "ndk16", "ndk14" ]
+    branches:
+    - master
+    - ndk*
     tags:
     - ndk*
 jobs:
