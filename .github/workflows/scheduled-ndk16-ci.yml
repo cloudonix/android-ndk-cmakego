@@ -7,4 +7,4 @@ on:
 
 jobs:
   trigger-main-workflow:
-    uses: cloudonix/android-ndk-cmakego/.github/workflows/reusable-workflow.yml@ndk16
+    uses: cloudonix/android-ndk-cmakego/.github/workflows/podman-image.yml@ndk16
