@@ -7,16 +7,27 @@ on:
     - ndk*
     tags:
     - ndk*
+  schedule: 
+    - cron: '17 6 2 * *'
+  workflow_call:
+
+env:
+  current_ref: ${{ github.ref }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     environment: quay
     steps:
+    - name: Check build ref
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.override_ref }}" ]; then echo current_ref=${{ inputs.override_ref }} >> $GITHUB_ENV
     - name: Setup env
       shell: bash
       run: |
         set -x
-        ref="${{ github.ref }}"
+        ref="${{ env.current_ref }}"
         (
           if [ "$(basename $(dirname $ref))" == "tags" ]; then
             name="$(basename $ref)"
@@ -31,6 +42,8 @@ jobs:
           echo IMGTAG=latest >> $GITHUB_ENV
         )
     - uses: actions/checkout@v3
+      with:
+        ref: ${{ env.current_ref }}
     - name: Build Container
       shell: bash
       run: docker build -t quay.io/cloudonix/android-ndk-cmakego:$IMGTAG -f Dockerfile .
